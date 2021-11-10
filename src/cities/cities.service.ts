@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateCityDto } from './dto/create-city.dto';
-import { UpdateCityDto } from './dto/update-city.dto';
 import { City } from './entities/city.entity';
 
 @Injectable()
@@ -12,9 +10,9 @@ export class CitiesService {
     private usersRepository: Repository<City>,
   ) {}
 
-  // create(createCityDto: CreateCityDto) {
-  //   return 'This action adds a new city';
-  // }
+  createOne(createCityDto: City) {
+    return this.usersRepository.save(createCityDto);
+  }
 
   findAll() {
     return this.usersRepository.find();

@@ -9,17 +9,17 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CitiesService } from './cities.service';
-import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
+import { City } from './entities/city.entity';
 
 @Controller('cities')
 export class CitiesController {
   constructor(private readonly citiesService: CitiesService) {}
 
-  // @Post()
-  // create(@Body() createCityDto: CreateCityDto) {
-  //   return this.citiesService.create(createCityDto);
-  // }
+  @Post()
+  create(@Body() createCityDto: City) {
+    return this.citiesService.createOne(createCityDto);
+  }
 
   @Get()
   findAll() {
