@@ -31,10 +31,14 @@ export class CitiesController {
     return this.citiesService.findOne(id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-  //   return this.citiesService.update(+id, updateCityDto);
-  // }
+  @Patch(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCityDto: UpdateCityDto,
+  ) {
+    await this.citiesService.updateOne(id, updateCityDto);
+    return this.citiesService.findOne(id);
+  }
 
   // @Delete(':id')
   // remove(@Param('id') id: string) {

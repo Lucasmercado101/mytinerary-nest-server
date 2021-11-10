@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UpdateCityDto } from './dto/update-city.dto';
 import { City } from './entities/city.entity';
 
 @Injectable()
@@ -22,9 +23,9 @@ export class CitiesService {
     return this.usersRepository.findOne(id);
   }
 
-  // update(id: number, updateCityDto: UpdateCityDto) {
-  //   return `This action updates a #${id} city`;
-  // }
+  updateOne(id: number, updateCityDto: UpdateCityDto) {
+    return this.usersRepository.update(id, updateCityDto);
+  }
 
   // remove(id: number) {
   //   return `This action removes a #${id} city`;
