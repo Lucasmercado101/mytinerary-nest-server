@@ -40,8 +40,8 @@ export class CitiesController {
     return this.citiesService.findOne(id);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.citiesService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.citiesService.removeOne(id);
+  }
 }

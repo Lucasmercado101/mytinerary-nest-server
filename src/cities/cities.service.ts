@@ -27,7 +27,7 @@ export class CitiesService {
     return this.usersRepository.update(id, updateCityDto);
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} city`;
-  // }
+  async removeOne(id: number) {
+    await this.usersRepository.delete(id);
+  }
 }
