@@ -15,28 +15,28 @@ import { UpdateCityDto } from './dto/update-city.dto';
 export class CitiesController {
   constructor(private readonly citiesService: CitiesService) {}
 
-  @Post()
-  create(@Body() createCityDto: CreateCityDto) {
-    return this.citiesService.create(createCityDto);
-  }
+  // @Post()
+  // create(@Body() createCityDto: CreateCityDto) {
+  //   return this.citiesService.create(createCityDto);
+  // }
 
-  @Get()
-  findAll() {
-    return this.citiesService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.citiesService.findAll();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.citiesService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-    return this.citiesService.update(+id, updateCityDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
+  //   return this.citiesService.update(+id, updateCityDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.citiesService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.citiesService.remove(+id);
+  // }
 }
