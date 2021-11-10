@@ -21,10 +21,10 @@ export class CitiesController {
   //   return this.citiesService.create(createCityDto);
   // }
 
-  // @Get()
-  // findAll() {
-  //   return this.citiesService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.citiesService.findAll();
+  }
 
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {

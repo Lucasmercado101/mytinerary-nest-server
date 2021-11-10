@@ -16,9 +16,9 @@ export class CitiesService {
   //   return 'This action adds a new city';
   // }
 
-  // findAll() {
-  //   return `This action returns all cities`;
-  // }
+  findAll() {
+    return this.usersRepository.find();
+  }
 
   findOne(id: number) {
     return this.usersRepository.findOne(id);
