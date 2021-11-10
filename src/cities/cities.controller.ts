@@ -1,3 +1,4 @@
+import { ParseIntPipe } from '@nestjs/common';
 import {
   Controller,
   Get,
@@ -26,8 +27,8 @@ export class CitiesController {
   // }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.citiesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.citiesService.findOne(id);
   }
 
   // @Patch(':id')
