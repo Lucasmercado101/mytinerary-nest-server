@@ -1,4 +1,5 @@
 import { City } from 'src/modules/cities/entities/city.entity';
+import { User } from 'src/modules/users/entity/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'itinerary' })
@@ -9,7 +10,7 @@ export class Itinerary {
   @Column({ nullable: false })
   title: string;
 
-  @Column({ nullable: false })
+  @ManyToOne(() => User, { nullable: false })
   creator: string;
 
   @Column({ nullable: false })
