@@ -15,26 +15,26 @@ import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 export class ItinerariesController {
   constructor(private readonly itinerariesService: ItinerariesService) {}
 
-  @Get()
-  findAll() {
-    return this.itinerariesService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.itinerariesService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itinerariesService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.itinerariesService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateItineraryDto: UpdateItineraryDto,
-  ) {
-    return this.itinerariesService.update(+id, updateItineraryDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateItineraryDto: UpdateItineraryDto,
+  // ) {
+  //   return this.itinerariesService.update(+id, updateItineraryDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itinerariesService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.itinerariesService.remove(+id);
+  // }
 }
