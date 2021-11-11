@@ -11,7 +11,7 @@ export class Itinerary {
   title: string;
 
   @ManyToOne(() => User, { nullable: false })
-  creator: string;
+  creator: number;
 
   @Column({ nullable: false })
   time: number;
@@ -20,7 +20,7 @@ export class Itinerary {
   price: number;
 
   @Column('text', { nullable: false, array: true })
-  hashtags: [string?, string?, string?];
+  hashtags: string[];
 
   @Column('text', { nullable: false, array: true })
   activities: string[];
