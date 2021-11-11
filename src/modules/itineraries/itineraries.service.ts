@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
+import { Itinerary } from './entities/itinerary.entity';
 
 @Injectable()
 export class ItinerariesService {
-  create(createItineraryDto: CreateItineraryDto) {
-    return 'This action adds a new itinerary';
+  constructor(
+    @InjectRepository(Itinerary)
+    private itinerariesRepository: Repository<Itinerary>,
+  ) {}
+
+  createOne(createItineraryDto: Omit<Itinerary, 'id'>) {
+    return this.itinerariesRepository.save(createItineraryDto);
   }
 
   findAll() {
