@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
+import { ItinerariesModule } from './modules/itineraries/itineraries.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UsersModule } from './modules/users/users.module';
     SessionsModule,
     AuthModule,
     UsersModule,
+    ItinerariesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
