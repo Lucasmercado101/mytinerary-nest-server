@@ -8,6 +8,9 @@ export class User {
   @Column({ nullable: false })
   username: string;
 
+  @Column({ nullable: true })
+  profile_pic?: string;
+
   @Column({ nullable: false })
   password: string;
 }
