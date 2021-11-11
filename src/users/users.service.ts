@@ -17,6 +17,15 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
+  public async findOneByUsername(username: string): Promise<User> {
+    return this.usersRepository
+      .findOne({ where: { username } })
+      .then((user) => {
+        delete user.password;
+        return user;
+      });
+  }
+
   public async createOne(newUserData: CreateUserDTO): Promise<UserDTO> {
     if ((await this.checkIfUserExists(newUserData.username)) === true)
       throw new ConflictException('User already exists');
