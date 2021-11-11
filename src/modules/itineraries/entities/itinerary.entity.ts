@@ -24,5 +24,5 @@ export class Itinerary {
   activities: string[];
 
   @Column({ nullable: false })
-  cityId: number;
+  city_id: number;
 }
