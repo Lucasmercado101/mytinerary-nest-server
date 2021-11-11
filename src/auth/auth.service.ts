@@ -23,4 +23,8 @@ export class AuthService {
   async logout(session_id: string) {
     return this.sessionsService.deleteSession(session_id);
   }
+
+  async isLoggedIn(session_id: string) {
+    return this.sessionsService.isValidSession(session_id);
+  }
 }

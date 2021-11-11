@@ -27,4 +27,13 @@ export class AuthController {
     }
     return response.sendStatus(204);
   }
+
+  @Get('isLoggedIn')
+  async isLoggedIn(@Req() request: Request, @Res() response: Response) {
+    if (request.cookies.sid) {
+      const isLoggedIn = await this.authService.isLoggedIn(request.cookies.sid);
+      return response.sendStatus(isLoggedIn ? 200 : 401);
+    }
+    return response.sendStatus(401);
+  }
 }
