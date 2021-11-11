@@ -27,18 +27,21 @@ export class CitiesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.citiesService.findOne(id);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: number, @Body() updateCityDto: UpdateCityDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCityDto: UpdateCityDto,
+  ) {
     await this.citiesService.updateOne(id, updateCityDto);
     return this.citiesService.findOne(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.citiesService.removeOne(id);
   }
 }
