@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { CitiesModule } from './cities/cities.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { SessionsModule } from './sessions/sessions.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { ConfigModule } from '@nestjs/config';
       // TODO: turn off in prod
       synchronize: true,
     }),
+    SessionsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
