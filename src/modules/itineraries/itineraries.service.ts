@@ -16,12 +16,8 @@ export class ItinerariesService {
     return this.itinerariesRepository.save(createItineraryDto);
   }
 
-  findAll() {
-    return `This action returns all itineraries`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} itinerary`;
+  findOneById(id: number) {
+    return this.itinerariesRepository.findOne(id);
   }
 
   update(id: number, updateItineraryDto: UpdateItineraryDto) {
