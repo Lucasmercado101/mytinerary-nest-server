@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { City } from 'src/modules/cities/entities/city.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'itinerary' })
 export class Itinerary {
@@ -15,7 +16,7 @@ export class Itinerary {
   time: number;
 
   @Column({ nullable: false })
-  country: string;
+  price: number;
 
   @Column('text', { nullable: false, array: true })
   hashtags: [string?, string?, string?];
@@ -23,6 +24,6 @@ export class Itinerary {
   @Column('text', { nullable: false, array: true })
   activities: string[];
 
-  @Column({ nullable: false })
-  city_id: number;
+  @ManyToOne(() => City, { nullable: false })
+  city: number;
 }
