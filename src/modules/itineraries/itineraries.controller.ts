@@ -11,14 +11,9 @@ import { ItinerariesService } from './itineraries.service';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 
-@Controller('itineraries')
+@Controller('itinerary')
 export class ItinerariesController {
   constructor(private readonly itinerariesService: ItinerariesService) {}
-
-  @Post()
-  create(@Body() createItineraryDto: CreateItineraryDto) {
-    return this.itinerariesService.create(createItineraryDto);
-  }
 
   @Get()
   findAll() {
