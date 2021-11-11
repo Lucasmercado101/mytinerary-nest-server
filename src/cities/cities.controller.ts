@@ -1,4 +1,4 @@
-import { ParseIntPipe } from '@nestjs/common';
+import { ParseIntPipe, Req, UseGuards } from '@nestjs/common';
 import {
   Controller,
   Get,
@@ -8,15 +8,16 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { CitiesService } from './cities.service';
 import { UpdateCityDto } from './dto/update-city.dto';
 import { City } from './entities/city.entity';
-
 @Controller('cities')
 export class CitiesController {
   constructor(private readonly citiesService: CitiesService) {}
 
   @Post()
+  @UseGuards(IsLoggedInGuard)
   create(@Body() createCityDto: City) {
     return this.citiesService.createOne(createCityDto);
   }
