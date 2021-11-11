@@ -20,4 +20,8 @@ export class SessionsService {
       expiration: new Date(Date.now() + TwentyFourHours),
     });
   }
+
+  deleteSession(sessionId: string) {
+    return this.sessionsRepository.delete({ session_id: sessionId });
+  }
 }
