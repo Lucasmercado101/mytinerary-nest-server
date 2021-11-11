@@ -3,8 +3,8 @@ import { CitiesService } from './cities.service';
 import { CitiesController } from './cities.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { City } from './entities/city.entity';
-import { SessionsModule } from 'src/sessions/sessions.module';
-import { UsersModule } from 'src/users/users.module';
+import { SessionsModule } from 'src/modules/sessions/sessions.module';
+import { UsersModule } from 'src/modules/users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([City]), SessionsModule, UsersModule],

@@ -5,8 +5,8 @@ import {
   Inject,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { SessionsService } from 'src/sessions/sessions.service';
-import { UsersService } from 'src/users/users.service';
+import { SessionsService } from 'src/modules/sessions/sessions.service';
+import { UsersService } from 'src/modules/users/users.service';
 
 @Injectable()
 export class IsLoggedInGuard implements CanActivate {
