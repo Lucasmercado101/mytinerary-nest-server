@@ -24,4 +24,17 @@ export class SessionsService {
   deleteSession(sessionId: string) {
     return this.sessionsRepository.delete({ session_id: sessionId });
   }
+
+  async isValidSession(sessionId: string) {
+    const session = await this.sessionsRepository.findOne({
+      session_id: sessionId,
+    });
+    if (!session) {
+      return false;
+    }
+    if (session.expiration < new Date()) {
+      return false;
+    }
+    return true;
+  }
 }
