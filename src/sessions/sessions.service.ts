@@ -37,4 +37,11 @@ export class SessionsService {
     }
     return true;
   }
+
+  async getSession(sessionId) {
+    if (this.isValidSession(sessionId)) {
+      return this.sessionsRepository.findOne({ session_id: sessionId });
+    }
+    return null;
+  }
 }
