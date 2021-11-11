@@ -8,5 +8,6 @@ import { Itinerary } from './entities/itinerary.entity';
   imports: [TypeOrmModule.forFeature([Itinerary])],
   providers: [ItinerariesService],
   controllers: [ItinerariesController],
+  exports: [ItinerariesService],
 })
 export class ItinerariesModule {}
