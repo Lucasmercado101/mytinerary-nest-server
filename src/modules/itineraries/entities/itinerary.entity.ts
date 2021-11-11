@@ -16,4 +16,13 @@ export class Itinerary {
 
   @Column({ nullable: false })
   country: string;
+
+  @Column('text', { nullable: false, array: true })
+  hashtags: [string?, string?, string?];
+
+  @Column('text', { nullable: false, array: true })
+  activities: string[];
+
+  @Column({ nullable: false })
+  cityId: number;
 }
