@@ -1,4 +1,3 @@
-import { City } from 'src/modules/cities/entities/city.entity';
 import { User } from 'src/modules/users/entity/user.entity';
 import {
   Entity,
