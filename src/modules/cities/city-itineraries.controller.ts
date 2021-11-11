@@ -1,26 +1,16 @@
 import {
   NotFoundException,
   ParseIntPipe,
-  Req,
+  Redirect,
   UseGuards,
 } from '@nestjs/common';
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { User } from 'src/decorators/user.decorator';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { CreateItineraryDto } from '../itineraries/dto/create-itinerary.dto';
 import { ItinerariesService } from '../itineraries/itineraries.service';
 import { User as UserEntity } from '../users/entity/user.entity';
 import { CitiesService } from './cities.service';
-import { UpdateCityDto } from './dto/update-city.dto';
-import { City } from './entities/city.entity';
 
 @Controller('cities/:id/itinerary')
 export class CityItinerariesController {
@@ -53,27 +43,9 @@ export class CityItinerariesController {
     });
   }
 
-  //   @Get()
-  //   findAll() {
-  //     return this.citiesService.findAll();
-  //   }
-
-  //   @Get(':id')
-  //   findOne(@Param('id', ParseIntPipe) id: number) {
-  //     return this.citiesService.findOne(id);
-  //   }
-
-  //   @Patch(':id')
-  //   async update(
-  //     @Param('id', ParseIntPipe) id: number,
-  //     @Body() updateCityDto: UpdateCityDto,
-  //   ) {
-  //     await this.citiesService.updateOne(id, updateCityDto);
-  //     return this.citiesService.findOne(id);
-  //   }
-
-  //   @Delete(':id')
-  //   remove(@Param('id', ParseIntPipe) id: number) {
-  //     return this.citiesService.removeOne(id);
-  //   }
+  @Get('/?*')
+  @Redirect('itinerary')
+  redirect() {
+    return;
+  }
 }
