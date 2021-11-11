@@ -19,4 +19,8 @@ export class AuthService {
     const { session_id } = await this.sessionsService.createSession(user.id);
     return session_id;
   }
+
+  async logout(session_id: string) {
+    return this.sessionsService.deleteSession(session_id);
+  }
 }
