@@ -1,4 +1,9 @@
-import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import {
+  Column,
+  PrimaryGeneratedColumn,
+  Entity,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity({ name: 'sessions' })
 export class Session {
@@ -12,6 +17,6 @@ export class Session {
   session_id!: string;
 
   // date with timezone
-  @Column({ type: 'timestamptz', nullable: false }) // Recommended
+  @CreateDateColumn({ nullable: false })
   expiration!: Date;
 }
