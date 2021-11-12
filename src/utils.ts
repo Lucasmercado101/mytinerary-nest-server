@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+import * as bcrypt from 'bcrypt';
 
 export const PromisifiedBcryptHash = (pass, saltRounds): Promise<string> =>
   new Promise((res, rej) =>
