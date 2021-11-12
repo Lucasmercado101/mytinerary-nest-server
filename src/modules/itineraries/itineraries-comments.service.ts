@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { CreateItineraryCommentDto } from './dto/create-comment.dto';
 import { ItineraryComment } from './entities/comment.entity';
+import { match } from 'fp-ts/Either';
+import { User } from '../users/entity/user.entity';
 
 @Injectable()
 export class ItinerariesCommentsService {
@@ -15,10 +17,15 @@ export class ItinerariesCommentsService {
 
   async createOne(newCommentDto: CreateItineraryCommentDto) {
     const user = await this.usersService.findOneById(newCommentDto.author_id);
-
-    return this.itinerariesCommentsRepository.save({
-      author: user,
-      ...newCommentDto,
-    });
+    return match(
+      () => {
+        throw new InternalServerErrorException();
+      },
+      (userData: Omit<User, 'password'>) =>
+        this.itinerariesCommentsRepository.save({
+          author: userData,
+          ...newCommentDto,
+        }),
+    )(user);
   }
 }
