@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { User } from 'src/decorators/user.decorator';
+import { CityExistsGuard } from 'src/guards/cityExists.guard';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { CreateItineraryDto } from '../itineraries/dto/create-itinerary.dto';
 import { ItinerariesService } from '../itineraries/itineraries.service';
@@ -13,6 +14,7 @@ import { User as UserEntity } from '../users/entity/user.entity';
 import { CitiesService } from './cities.service';
 
 @Controller('cities/:id/itinerary')
+@UseGuards(CityExistsGuard)
 export class CityItinerariesController {
   constructor(
     private readonly citiesService: CitiesService,
@@ -27,11 +29,6 @@ export class CityItinerariesController {
     @User() user: Omit<UserEntity, 'password'>,
     @Param('id', ParseIntPipe) cityId: number,
   ) {
-    const city = await this.citiesService.findOne(cityId);
-    if (!city) {
-      throw new NotFoundException(`City with id ${cityId} not found`);
-    }
-
     return this.itinerariesService.createOne({
       activities: createItineraryDto.activities,
       city: cityId,
