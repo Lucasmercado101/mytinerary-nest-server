@@ -1,4 +1,5 @@
 import { IsNumber, IsString } from 'class-validator';
+import { Itinerary } from '../entities/itinerary.entity';
 
 export class CreateItineraryCommentDto {
   @IsNumber()
@@ -6,4 +7,6 @@ export class CreateItineraryCommentDto {
 
   @IsString()
   comment: string;
+
+  itinerary: Itinerary;
 }
