@@ -20,6 +20,10 @@ export class ItinerariesService {
     return this.itinerariesRepository.findOne(id);
   }
 
+  public findAll() {
+    return this.itinerariesRepository.find();
+  }
+
   public itineraryExists(id: number): Promise<boolean> {
     return this.itinerariesRepository
       .findOne(id)
