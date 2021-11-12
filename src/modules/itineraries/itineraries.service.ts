@@ -17,7 +17,7 @@ export class ItinerariesService {
   }
 
   public findOneById(id: number) {
-    return this.itinerariesRepository.findOne(id);
+    return this.itinerariesRepository.findOne(id, { relations: ['comments'] });
   }
 
   public findAll() {
