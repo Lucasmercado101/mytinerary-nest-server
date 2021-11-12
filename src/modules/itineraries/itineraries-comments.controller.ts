@@ -27,15 +27,13 @@ export class ItinerariesCommentsController {
     @PlainBody() comment: string,
   ) {
     const itinerary = await this.itinerariesService.findOneById(id);
-    if (!itinerary) {
-      throw new NotFoundException(`Itinerary with id ${id} not found`);
-    }
     if (!comment) {
       throw new NotFoundException('Comment is required');
     }
     return this.itinerariesCommentsService.createOne({
       author_id: id,
       comment,
+      itinerary: itinerary,
     });
   }
 }
