@@ -19,10 +19,10 @@ export class ItinerariesCommentsService {
 
   async createOne(newCommentDto: CreateItineraryCommentDto) {
     const user = await this.usersService.findOneById(newCommentDto.author_id);
+
     return this.itinerariesCommentsRepository.save({
-      comment: newCommentDto.comment,
       author: user,
-      itinerary: newCommentDto.itinerary,
+      ...newCommentDto,
     });
   }
 }
