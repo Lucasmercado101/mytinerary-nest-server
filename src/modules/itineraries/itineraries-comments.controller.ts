@@ -8,10 +8,12 @@ import {
 } from '@nestjs/common';
 import { PlainBody } from 'src/decorators/plainBody.decorator';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
+import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
 import { ItinerariesCommentsService } from './itineraries-comments.service';
 import { ItinerariesService } from './itineraries.service';
 
 @Controller('itinerary/:id/comment')
+@UseGuards(ItineraryExistsGuard)
 export class ItinerariesCommentsController {
   constructor(
     private readonly itinerariesService: ItinerariesService,
