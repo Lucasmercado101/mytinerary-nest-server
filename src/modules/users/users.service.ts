@@ -9,6 +9,7 @@ import { CreateUserDTO } from './dto/create-user.dto';
 import { User } from './entity/user.entity';
 import { PromisifiedBcryptHash } from 'src/utils';
 import { UserDTO } from './dto/user.dto';
+import * as Either from 'fp-ts/lib/Either';
 
 @Injectable()
 export class UsersService {
@@ -26,11 +27,20 @@ export class UsersService {
       });
   }
 
-  public async findOneById(id: number): Promise<User> {
-    return this.usersRepository.findOne({ where: { id } }).then((user) => {
-      delete user.password;
-      return user;
-    });
+  public async findOneById(
+    id: number,
+  ): Promise<Either.Either<Omit<User, 'password'>, any>> {
+    return this.usersRepository
+      .findOne({ where: { id } })
+      .then((user?: User) => {
+        if (user) {
+          delete user.password;
+          return Either.right(user);
+        }
+      })
+      .catch((err) => {
+        return Either.left(err);
+      });
   }
 
   public async createOne(newUserData: CreateUserDTO): Promise<UserDTO> {
