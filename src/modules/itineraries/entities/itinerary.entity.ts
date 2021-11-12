@@ -37,6 +37,7 @@ export class Itinerary {
 
   @OneToMany(() => ItineraryComment, (comment) => comment.itinerary, {
     nullable: true,
+    onDelete: 'CASCADE',
   })
   comments: ItineraryComment[];
 }
