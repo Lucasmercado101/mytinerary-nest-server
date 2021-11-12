@@ -5,6 +5,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Body,
 } from '@nestjs/common';
 import { ItinerariesService } from './itineraries.service';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
@@ -25,13 +26,15 @@ export class ItinerariesController {
     return this.itinerariesService.findOneById(id);
   }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateItineraryDto: UpdateItineraryDto,
-  // ) {
-  //   return this.itinerariesService.update(+id, updateItineraryDto);
-  // }
+  @Patch(':id')
+  async update(
+    @Param('id') id: number,
+    @Body()
+    updateItineraryDto: Omit<Omit<UpdateItineraryDto, 'cityId'>, 'authorId'>,
+  ) {
+    await this.itinerariesService.updateOne(id, updateItineraryDto);
+    return await this.itinerariesService.findOneById(id);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: number) {
