@@ -12,19 +12,17 @@ export class ItinerariesService {
     private itinerariesRepository: Repository<Itinerary>,
   ) {}
 
-  createOne(createItineraryDto: Omit<Itinerary, 'id'>) {
+  public createOne(createItineraryDto: Omit<Itinerary, 'id'>) {
     return this.itinerariesRepository.save(createItineraryDto);
   }
 
-  findOneById(id: number) {
+  public findOneById(id: number) {
     return this.itinerariesRepository.findOne(id);
   }
 
-  update(id: number, updateItineraryDto: UpdateItineraryDto) {
-    return `This action updates a #${id} itinerary`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} itinerary`;
+  public itineraryExists(id: number): Promise<boolean> {
+    return this.itinerariesRepository
+      .findOne(id)
+      .then((itinerary) => !!itinerary);
   }
 }
