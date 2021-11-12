@@ -24,6 +24,10 @@ export class ItinerariesService {
     return this.itinerariesRepository.delete(id);
   }
 
+  public updateOne(id: number, updateItineraryDto: UpdateItineraryDto) {
+    return this.itinerariesRepository.update(id, updateItineraryDto);
+  }
+
   public findAll() {
     return this.itinerariesRepository.find({
       relations: ['comments'],
