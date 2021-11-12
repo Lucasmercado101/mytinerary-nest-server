@@ -1,9 +1,4 @@
-import {
-  NotFoundException,
-  ParseIntPipe,
-  Redirect,
-  UseGuards,
-} from '@nestjs/common';
+import { ParseIntPipe, Redirect, UseGuards } from '@nestjs/common';
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { User } from 'src/decorators/user.decorator';
 import { CityExistsGuard } from 'src/guards/cityExists.guard';
