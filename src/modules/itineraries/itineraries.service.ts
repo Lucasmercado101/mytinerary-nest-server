@@ -20,6 +20,10 @@ export class ItinerariesService {
     return this.itinerariesRepository.findOne(id, { relations: ['comments'] });
   }
 
+  public removeOne(id: number) {
+    return this.itinerariesRepository.delete(id);
+  }
+
   public findAll() {
     return this.itinerariesRepository.find({
       relations: ['comments'],
