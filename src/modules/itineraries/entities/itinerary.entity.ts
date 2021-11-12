@@ -1,6 +1,13 @@
 import { City } from 'src/modules/cities/entities/city.entity';
 import { User } from 'src/modules/users/entity/user.entity';
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { ItineraryComment } from './comment.entity';
 
 @Entity({ name: 'itinerary' })
 export class Itinerary {
@@ -27,4 +34,9 @@ export class Itinerary {
 
   @ManyToOne(() => City, { nullable: false })
   city: number;
+
+  @OneToMany(() => ItineraryComment, (comment) => comment.itinerary, {
+    nullable: true,
+  })
+  comments: ItineraryComment[];
 }

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ItineraryComment } from 'src/modules/itineraries/entities/comment.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
@@ -13,4 +14,7 @@ export class User {
 
   @Column({ nullable: false })
   password: string;
+
+  @OneToMany(() => ItineraryComment, (comment) => comment.author)
+  itineraryComments: ItineraryComment[];
 }
