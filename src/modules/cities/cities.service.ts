@@ -27,6 +27,11 @@ export class CitiesService {
     return this.usersRepository.update(id, updateCityDto);
   }
 
+  // helper fn
+  public cityExists(id: number) {
+    return this.usersRepository.findOne(id).then((city) => !!city);
+  }
+
   async removeOne(id: number) {
     await this.usersRepository.delete(id);
   }
