@@ -5,6 +5,8 @@ import {
   NotFoundException,
   ParseIntPipe,
   UseGuards,
+  Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { PlainBody } from 'src/decorators/plainBody.decorator';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
@@ -14,6 +16,7 @@ import { ItinerariesService } from './itineraries.service';
 
 @Controller('itinerary/:id/comment')
 @UseGuards(ItineraryExistsGuard)
+@UseGuards(IsLoggedInGuard)
 export class ItinerariesCommentsController {
   constructor(
     private readonly itinerariesService: ItinerariesService,
@@ -21,7 +24,6 @@ export class ItinerariesCommentsController {
   ) {}
 
   @Post()
-  @UseGuards(IsLoggedInGuard)
   async createComment(
     @Param('id', ParseIntPipe) id: number,
     @PlainBody() comment: string,
@@ -35,5 +37,11 @@ export class ItinerariesCommentsController {
       comment,
       itinerary: itinerary,
     });
+  }
+
+  @Delete(':commentId')
+  @HttpCode(204)
+  async deleteComment(@Param('commentId', ParseIntPipe) commentId: number) {
+    await this.itinerariesCommentsService.deleteOne(commentId);
   }
 }
