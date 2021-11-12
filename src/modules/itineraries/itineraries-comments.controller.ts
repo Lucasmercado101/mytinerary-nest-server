@@ -4,8 +4,10 @@ import {
   Param,
   NotFoundException,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { PlainBody } from 'src/decorators/plainBody.decorator';
+import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { ItinerariesCommentsService } from './itineraries-comments.service';
 import { ItinerariesService } from './itineraries.service';
 
@@ -17,6 +19,7 @@ export class ItinerariesCommentsController {
   ) {}
 
   @Post()
+  @UseGuards(IsLoggedInGuard)
   async createComment(
     @Param('id', ParseIntPipe) id: number,
     @PlainBody() comment: string,
