@@ -28,4 +28,8 @@ export class ItinerariesCommentsService {
         }),
     )(user);
   }
+
+  async deleteOne(id: number) {
+    return this.itinerariesCommentsRepository.delete(id);
+  }
 }
