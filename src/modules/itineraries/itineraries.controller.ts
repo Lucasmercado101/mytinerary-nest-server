@@ -6,12 +6,15 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ItinerariesService } from './itineraries.service';
 import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
+import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
 
 @Controller('itinerary')
+@UseGuards(ItineraryExistsGuard)
 export class ItinerariesController {
   constructor(private readonly itinerariesService: ItinerariesService) {}
 
@@ -20,10 +23,10 @@ export class ItinerariesController {
     return this.itinerariesService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.itinerariesService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.itinerariesService.findOneById(id);
+  }
 
   // @Patch(':id')
   // update(
