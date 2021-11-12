@@ -40,6 +40,7 @@ export class CityItinerariesController {
       price: createItineraryDto.price,
       title: createItineraryDto.title,
       time: createItineraryDto.duration,
+      comments: null,
     });
   }
 
