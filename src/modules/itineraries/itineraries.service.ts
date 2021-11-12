@@ -21,7 +21,9 @@ export class ItinerariesService {
   }
 
   public findAll() {
-    return this.itinerariesRepository.find();
+    return this.itinerariesRepository.find({
+      relations: ['comments'],
+    });
   }
 
   public itineraryExists(id: number): Promise<boolean> {
