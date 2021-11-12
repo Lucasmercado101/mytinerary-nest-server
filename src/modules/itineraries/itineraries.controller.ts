@@ -1,15 +1,12 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
   Patch,
   Param,
   Delete,
   UseGuards,
 } from '@nestjs/common';
 import { ItinerariesService } from './itineraries.service';
-import { CreateItineraryDto } from './dto/create-itinerary.dto';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
 
@@ -36,8 +33,8 @@ export class ItinerariesController {
   //   return this.itinerariesService.update(+id, updateItineraryDto);
   // }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.itinerariesService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.itinerariesService.removeOne(id);
+  }
 }
