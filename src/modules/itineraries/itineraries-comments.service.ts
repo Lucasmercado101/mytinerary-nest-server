@@ -22,6 +22,7 @@ export class ItinerariesCommentsService {
     return this.itinerariesCommentsRepository.save({
       comment: newCommentDto.comment,
       author: user,
+      itinerary: newCommentDto.itinerary,
     });
   }
 }
