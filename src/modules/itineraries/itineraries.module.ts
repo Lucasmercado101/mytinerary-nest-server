@@ -7,11 +7,13 @@ import { ItinerariesCommentsController } from './itineraries-comments.controller
 import { ItineraryComment } from './entities/comment.entity';
 import { ItinerariesCommentsService } from './itineraries-comments.service';
 import { UsersModule } from '../users/users.module';
+import { SessionsModule } from '../sessions/sessions.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Itinerary, ItineraryComment]),
     UsersModule,
+    SessionsModule,
   ],
   providers: [ItinerariesService, ItinerariesCommentsService],
   controllers: [ItinerariesController, ItinerariesCommentsController],
