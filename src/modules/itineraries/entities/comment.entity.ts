@@ -20,6 +20,8 @@ export class ItineraryComment {
   @Column({ nullable: false })
   comment: string;
 
-  @ManyToOne(() => Itinerary, (itinerary) => itinerary.comments)
+  @ManyToOne(() => Itinerary, (itinerary) => itinerary.comments, {
+    onDelete: 'CASCADE',
+  })
   itinerary: Itinerary;
 }
