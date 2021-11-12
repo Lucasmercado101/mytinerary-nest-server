@@ -15,10 +15,10 @@ import { UpdateItineraryDto } from './dto/update-itinerary.dto';
 export class ItinerariesController {
   constructor(private readonly itinerariesService: ItinerariesService) {}
 
-  // @Get()
-  // findAll() {
-  //   return this.itinerariesService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.itinerariesService.findAll();
+  }
 
   // @Get(':id')
   // findOne(@Param('id') id: string) {
