@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -22,6 +23,7 @@ export class UsersService {
     return this.usersRepository
       .findOne({ where: { username } })
       .then((user) => {
+        if (!user) throw new NotFoundException();
         delete user.password;
         return user;
       });
