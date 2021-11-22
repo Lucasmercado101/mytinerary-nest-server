@@ -29,7 +29,6 @@ export class CitiesService {
 		activities,
 		hashtags,
 		user_id as "userId",
-    	profile_pic,
 		"cityId"
 	FROM itinerary
 		INNER JOIN (
@@ -80,6 +79,9 @@ export class CitiesService {
 
           return comment;
         });
+
+      delete el.userId;
+      delete el.cityId;
 
       return { ...el, comments: itineraryComments };
     });
