@@ -27,6 +27,8 @@ export class CitiesController {
     return this.citiesService.findAll();
   }
 
+  // ------- ID --------
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.citiesService.findOne(id);
