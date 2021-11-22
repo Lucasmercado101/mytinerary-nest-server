@@ -8,6 +8,7 @@ import { SessionsModule } from './modules/sessions/sessions.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { ItinerariesModule } from './modules/itineraries/itineraries.module';
+import { ItineraryCommentsModule } from './modules/itinerary-comments/itinerary-comments.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ItinerariesModule } from './modules/itineraries/itineraries.module';
     AuthModule,
     UsersModule,
     ItinerariesModule,
+    ItineraryCommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
