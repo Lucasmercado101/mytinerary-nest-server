@@ -4,7 +4,6 @@ import {
   ExecutionContext,
   Inject,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
 import { SessionsService } from 'src/modules/sessions/sessions.service';
 import { UsersService } from 'src/modules/users/users.service';
 
