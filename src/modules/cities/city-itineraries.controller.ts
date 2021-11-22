@@ -1,20 +1,17 @@
-import { ParseIntPipe, Redirect, UseGuards } from '@nestjs/common';
+import { Delete, ParseIntPipe, Patch, UseGuards } from '@nestjs/common';
 import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { User } from 'src/decorators/user.decorator';
 import { CityExistsGuard } from 'src/guards/cityExists.guard';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { CreateItineraryDto } from '../itineraries/dto/create-itinerary.dto';
+import { UpdateItineraryDto } from '../itineraries/dto/update-itinerary.dto';
 import { ItinerariesService } from '../itineraries/itineraries.service';
 import { User as UserEntity } from '../users/entity/user.entity';
-import { CitiesService } from './cities.service';
 
 @Controller('cities/:id/itinerary')
 @UseGuards(CityExistsGuard)
 export class CityItinerariesController {
-  constructor(
-    private readonly citiesService: CitiesService,
-    private readonly itinerariesService: ItinerariesService,
-  ) {}
+  constructor(private readonly itinerariesService: ItinerariesService) {}
 
   @Post()
   @UseGuards(IsLoggedInGuard)
@@ -34,11 +31,5 @@ export class CityItinerariesController {
       time: createItineraryDto.duration,
       comments: null,
     });
-  }
-
-  @Get('/?*')
-  @Redirect('itinerary')
-  redirect() {
-    return;
   }
 }
