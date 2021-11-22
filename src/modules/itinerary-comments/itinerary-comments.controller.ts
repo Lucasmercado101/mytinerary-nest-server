@@ -7,8 +7,6 @@ import {
   NotFoundException,
   HttpCode,
   UseGuards,
-  forwardRef,
-  Inject,
 } from '@nestjs/common';
 import { ItineraryCommentsService } from './itinerary-comments.service';
 import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
