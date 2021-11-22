@@ -20,7 +20,7 @@ export class CitiesService {
   }
 
   findOne(id: number) {
-    return this.usersRepository.findOne(id);
+    return this.usersRepository.findOne(id, { relations: ['itineraries'] });
   }
 
   updateOne(id: number, updateCityDto: UpdateCityDto) {

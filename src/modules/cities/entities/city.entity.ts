@@ -1,5 +1,6 @@
-import { IsNumber, IsString } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { IsString } from 'class-validator';
+import { Itinerary } from 'src/modules/itineraries/entities/itinerary.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'city' })
 export class City {
@@ -13,4 +14,9 @@ export class City {
   @Column({ nullable: false })
   @IsString()
   country: string;
+
+  @OneToMany((type) => Itinerary, (itinerary) => itinerary.city, {
+    nullable: true,
+  })
+  itineraries: Itinerary[];
 }
