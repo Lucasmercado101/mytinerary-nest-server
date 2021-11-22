@@ -1,4 +1,5 @@
 import { City } from 'src/modules/cities/entities/city.entity';
+import { ItineraryComment } from 'src/modules/itinerary-comments/entities/itinerary-comment.entity';
 import { User } from 'src/modules/users/entity/user.entity';
 import {
   Entity,
@@ -7,7 +8,6 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { ItineraryComment } from './comment.entity';
 
 @Entity({ name: 'itinerary' })
 export class Itinerary {

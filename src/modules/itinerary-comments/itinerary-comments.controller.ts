@@ -6,42 +6,45 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
+  NotFoundException,
+  HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { ItineraryCommentsService } from './itinerary-comments.service';
-import { CreateItineraryCommentDto } from './dto/create-itinerary-comment.dto';
-import { UpdateItineraryCommentDto } from './dto/update-itinerary-comment.dto';
+import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
+import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
+import { ItinerariesService } from '../itineraries/itineraries.service';
+import { PlainBody } from 'src/decorators/plainBody.decorator';
 
 @Controller('itinerary-comments')
+@UseGuards(ItineraryExistsGuard)
+@UseGuards(IsLoggedInGuard)
 export class ItineraryCommentsController {
   constructor(
-    private readonly itineraryCommentsService: ItineraryCommentsService,
+    private readonly itinerariesService: ItinerariesService,
+    private readonly itinerariesCommentsService: ItineraryCommentsService,
   ) {}
 
   @Post()
-  create(@Body() createItineraryCommentDto: CreateItineraryCommentDto) {
-    return this.itineraryCommentsService.create(createItineraryCommentDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.itineraryCommentsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itineraryCommentsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateItineraryCommentDto: UpdateItineraryCommentDto,
+  async createComment(
+    @Param('id', ParseIntPipe) id: number,
+    @PlainBody() comment: string,
   ) {
-    return this.itineraryCommentsService.update(+id, updateItineraryCommentDto);
+    const itinerary = await this.itinerariesService.findOneById(id);
+    if (!comment) {
+      throw new NotFoundException('Comment is required');
+    }
+    return this.itinerariesCommentsService.createOne({
+      author_id: id,
+      comment,
+      itinerary: itinerary,
+    });
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itineraryCommentsService.remove(+id);
+  @Delete(':commentId')
+  @HttpCode(204)
+  async deleteComment(@Param('commentId', ParseIntPipe) commentId: number) {
+    await this.itinerariesCommentsService.deleteOne(commentId);
   }
 }

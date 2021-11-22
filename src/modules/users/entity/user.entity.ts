@@ -1,4 +1,4 @@
-import { ItineraryComment } from 'src/modules/itineraries/entities/comment.entity';
+import { ItineraryComment } from 'src/modules/itinerary-comments/entities/itinerary-comment.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity({ name: 'users' })
