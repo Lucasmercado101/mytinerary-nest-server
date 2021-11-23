@@ -35,11 +35,15 @@ export class CitiesService {
 		activities,
 		hashtags,
 		user_id as "userId",
-		"cityId"
+		"cityId",
+    user_id as "creatorId",
+    profile_pic as "profilePic",
+    username as "creatorUsername"
 	FROM itinerary
 		INNER JOIN (
 			SELECT id as user_id,
-				profile_pic
+				profile_pic,
+        username
 			FROM users
 		) AS users ON itinerary."creatorId" = users.user_id
 	WHERE itinerary."cityId" = $1
@@ -67,9 +71,9 @@ export class CitiesService {
       [itineraries.map((el) => el.id)],
     );
 
-    const itinerariesResp = itineraries.map((el) => {
+    const itinerariesResp = itineraries.map((itinerary) => {
       const itineraryComments = comments
-        .filter((comment) => comment.itineraryId === el.id)
+        .filter((comment) => comment.itineraryId === itinerary.id)
         .map((el) => {
           const author = {
             id: el.authorId,
@@ -86,10 +90,20 @@ export class CitiesService {
           return comment;
         });
 
-      delete el.userId;
-      delete el.cityId;
+      delete itinerary.userId;
+      delete itinerary.cityId;
 
-      return { ...el, comments: itineraryComments };
+      itinerary.creator = {
+        id: itinerary.creatorId,
+        profilePic: itinerary.profilePic,
+        username: itinerary.creatorUsername,
+      };
+
+      delete itinerary.creatorId;
+      delete itinerary.profilePic;
+      delete itinerary.creatorUsername;
+
+      return { ...itinerary, comments: itineraryComments };
     });
 
     city.itineraries = itinerariesResp;
