@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateCityDto } from './dto/update-city.dto';
@@ -20,6 +20,12 @@ export class CitiesService {
   }
 
   async findOne(id: number) {
+    const city = await this.citiiesRepository.findOne(id);
+
+    if (!city) {
+      throw new NotFoundException(`City with ID "${id}" not found`);
+    }
+
     const itineraries = await this.citiiesRepository.query(
       `
       SELECT id,
@@ -86,7 +92,8 @@ export class CitiesService {
       return { ...el, comments: itineraryComments };
     });
 
-    return itinerariesResp;
+    city.itineraries = itinerariesResp;
+    return city;
   }
 
   updateOne(id: number, updateCityDto: UpdateCityDto) {
