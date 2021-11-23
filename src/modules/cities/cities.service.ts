@@ -8,19 +8,19 @@ import { City } from './entities/city.entity';
 export class CitiesService {
   constructor(
     @InjectRepository(City)
-    private usersRepository: Repository<City>,
+    private citiiesRepository: Repository<City>,
   ) {}
 
   createOne(createCityDto: City) {
-    return this.usersRepository.save(createCityDto);
+    return this.citiiesRepository.save(createCityDto);
   }
 
   findAll() {
-    return this.usersRepository.find();
+    return this.citiiesRepository.find();
   }
 
   async findOne(id: number) {
-    const itineraries = await this.usersRepository.query(
+    const itineraries = await this.citiiesRepository.query(
       `
       SELECT id,
 		title,
@@ -41,7 +41,7 @@ export class CitiesService {
       [id],
     );
 
-    const comments = await this.usersRepository.query(
+    const comments = await this.citiiesRepository.query(
       `
     SELECT id,
 			"authorId",
@@ -90,15 +90,15 @@ export class CitiesService {
   }
 
   updateOne(id: number, updateCityDto: UpdateCityDto) {
-    return this.usersRepository.update(id, updateCityDto);
+    return this.citiiesRepository.update(id, updateCityDto);
   }
 
   // helper fn
   public cityExists(id: number) {
-    return this.usersRepository.findOne(id).then((city) => !!city);
+    return this.citiiesRepository.findOne(id).then((city) => !!city);
   }
 
   async removeOne(id: number) {
-    await this.usersRepository.delete(id);
+    await this.citiiesRepository.delete(id);
   }
 }
