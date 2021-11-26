@@ -51,7 +51,7 @@ export class UsersService {
           password: hash,
         });
 
-        return { id: resp.id, username: resp.username };
+        return { id: resp.id, username: resp.username, profile_pic: null };
       })
       .catch(() => {
         throw new InternalServerErrorException();
