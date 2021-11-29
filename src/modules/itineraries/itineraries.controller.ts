@@ -9,6 +9,7 @@ import {
   Post,
   forwardRef,
   Inject,
+  HttpCode,
 } from '@nestjs/common';
 import { ItinerariesService } from './itineraries.service';
 import { UpdateItineraryDto } from './dto/update-itinerary.dto';
@@ -50,9 +51,9 @@ export class ItinerariesController {
     return await this.itinerariesService.findOneById(id);
   }
 
-  // TODO
-  @UseGuards(IsLoggedInGuard)
   @Delete(':id')
+  @UseGuards(IsLoggedInGuard)
+  @HttpCode(201)
   remove(@Param('id') id: number) {
     return this.itinerariesService.removeOne(id);
   }
