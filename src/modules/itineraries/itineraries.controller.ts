@@ -39,13 +39,12 @@ export class ItinerariesController {
     return this.itinerariesService.findOneById(id);
   }
 
-  // TODO
   @UseGuards(IsLoggedInGuard)
   @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body()
-    updateItineraryDto: Omit<Omit<UpdateItineraryDto, 'cityId'>, 'authorId'>,
+    updateItineraryDto: UpdateItineraryDto,
   ) {
     await this.itinerariesService.updateOne(id, updateItineraryDto);
     return await this.itinerariesService.findOneById(id);
