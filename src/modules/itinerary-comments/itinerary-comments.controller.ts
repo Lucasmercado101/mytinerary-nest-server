@@ -17,7 +17,6 @@ import { User } from '../users/entity/user.entity';
 import { ItineraryCommentExistsGuard } from 'src/guards/commentExists.guard';
 
 @Controller('itinerary-comment')
-@UseGuards(ItineraryCommentExistsGuard)
 @UseGuards(IsLoggedInGuard)
 export class ItineraryCommentsController {
   constructor(
@@ -43,10 +42,12 @@ export class ItineraryCommentsController {
 
   @Delete(':id')
   @HttpCode(204)
+  @UseGuards(ItineraryCommentExistsGuard)
   async deleteComment(
     @Param('id', ParseIntPipe) commentId: number,
     @UserD() user: User,
   ) {
+    // TODO
     await this.itinerariesCommentsService.deleteOne(commentId);
   }
 }
