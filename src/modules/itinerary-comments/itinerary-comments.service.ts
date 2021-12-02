@@ -24,13 +24,21 @@ export class ItineraryCommentsService {
     });
   }
 
-  async deleteOne(id: number) {
+  deleteOne(id: number) {
     return this.itinerariesCommentsRepository.delete(id);
   }
 
-  async exists(id: number) {
+  exists(id: number) {
     return this.itinerariesCommentsRepository
       .findOne(id)
       .then((itinerary) => !!itinerary);
+  }
+
+  belongsToUser(id: number, userId: number) {
+    return this.itinerariesCommentsRepository
+      .findOne(id, { relations: ['author'] })
+      .then((itinerary) => {
+        return itinerary.author.id === userId;
+      });
   }
 }
