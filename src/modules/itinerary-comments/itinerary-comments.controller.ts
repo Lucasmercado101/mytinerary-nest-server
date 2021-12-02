@@ -14,7 +14,7 @@ import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { ItinerariesService } from '../itineraries/itineraries.service';
 import { PlainBody } from 'src/decorators/plainBody.decorator';
 
-@Controller('itinerary-comments')
+@Controller('itinerary-comment')
 @UseGuards(ItineraryExistsGuard)
 @UseGuards(IsLoggedInGuard)
 export class ItineraryCommentsController {
