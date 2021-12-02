@@ -9,13 +9,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ItineraryCommentsService } from './itinerary-comments.service';
-import { ItineraryExistsGuard } from 'src/guards/itineraryExists.guard';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
 import { ItinerariesService } from '../itineraries/itineraries.service';
 import { PlainBody } from 'src/decorators/plainBody.decorator';
+import { User as UserD } from 'src/decorators/user.decorator';
+import { User } from '../users/entity/user.entity';
+import { ItineraryCommentExistsGuard } from 'src/guards/commentExists.guard';
 
 @Controller('itinerary-comment')
-@UseGuards(ItineraryExistsGuard)
+@UseGuards(ItineraryCommentExistsGuard)
 @UseGuards(IsLoggedInGuard)
 export class ItineraryCommentsController {
   constructor(
@@ -41,7 +43,10 @@ export class ItineraryCommentsController {
 
   @Delete(':id')
   @HttpCode(204)
-  async deleteComment(@Param('id', ParseIntPipe) commentId: number) {
+  async deleteComment(
+    @Param('id', ParseIntPipe) commentId: number,
+    @UserD() user: User,
+  ) {
     await this.itinerariesCommentsService.deleteOne(commentId);
   }
 }
