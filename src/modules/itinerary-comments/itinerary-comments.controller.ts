@@ -7,6 +7,7 @@ import {
   NotFoundException,
   HttpCode,
   UseGuards,
+  ForbiddenException,
 } from '@nestjs/common';
 import { ItineraryCommentsService } from './itinerary-comments.service';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
@@ -47,7 +48,14 @@ export class ItineraryCommentsController {
     @Param('id', ParseIntPipe) commentId: number,
     @UserD() user: User,
   ) {
-    // TODO
-    await this.itinerariesCommentsService.deleteOne(commentId);
+    if (
+      await this.itinerariesCommentsService.belongsToUser(commentId, user.id)
+    ) {
+      await this.itinerariesCommentsService.deleteOne(commentId);
+    } else {
+      throw new ForbiddenException(
+        'You are not allowed to delete this comment',
+      );
+    }
   }
 }
