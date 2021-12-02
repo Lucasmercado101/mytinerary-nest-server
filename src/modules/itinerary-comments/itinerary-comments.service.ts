@@ -27,4 +27,10 @@ export class ItineraryCommentsService {
   async deleteOne(id: number) {
     return this.itinerariesCommentsRepository.delete(id);
   }
+
+  async exists(id: number) {
+    return this.itinerariesCommentsRepository
+      .findOne(id)
+      .then((itinerary) => !!itinerary);
+  }
 }
