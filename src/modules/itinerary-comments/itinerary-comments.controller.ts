@@ -39,9 +39,9 @@ export class ItineraryCommentsController {
     });
   }
 
-  @Delete(':commentId')
+  @Delete(':id')
   @HttpCode(204)
-  async deleteComment(@Param('commentId', ParseIntPipe) commentId: number) {
+  async deleteComment(@Param('id', ParseIntPipe) commentId: number) {
     await this.itinerariesCommentsService.deleteOne(commentId);
   }
 }
