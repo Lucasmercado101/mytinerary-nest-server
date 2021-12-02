@@ -18,10 +18,15 @@ export class ItineraryCommentsService {
 
     if (!user) throw new InternalServerErrorException();
 
-    this.itinerariesCommentsRepository.save({
+    const resp = await this.itinerariesCommentsRepository.save({
       author: user,
       ...newCommentDto,
     });
+    return {
+      id: resp.id,
+      comment: resp.comment,
+      author: resp.author,
+    };
   }
 
   deleteOne(id: number) {
