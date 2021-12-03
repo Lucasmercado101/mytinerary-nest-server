@@ -68,7 +68,9 @@ export class AuthController {
       );
       console.log(sessionId.session_id);
       response.cookie('sid', sessionId.session_id);
-      return response.sendStatus(200);
+      return response.json(
+        await this.usersService.findOneByUsername(user.username),
+      );
     }
     return response.sendStatus(401);
   }
