@@ -27,4 +27,8 @@ export class AuthService {
   async isLoggedIn(session_id: string) {
     return this.sessionsService.isValidSession(session_id);
   }
+
+  async refreshSession(session_id: string, user_id: number) {
+    return this.sessionsService.refreshSession(session_id, user_id);
+  }
 }

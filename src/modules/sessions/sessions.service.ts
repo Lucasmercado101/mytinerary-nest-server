@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Session } from './entities/session.entity';
@@ -43,5 +43,21 @@ export class SessionsService {
       return this.sessionsRepository.findOne({ session_id: sessionId });
     }
     return null;
+  }
+
+  async refreshSession(sessionId: string, userId: number) {
+    const oldSession = await this.sessionsRepository.findOne({
+      session_id: sessionId,
+    });
+    if (!oldSession) {
+      throw new UnauthorizedException();
+    }
+    await this.sessionsRepository.delete({ session_id: sessionId });
+    const newSessionId = uuid().replace(/-/g, '');
+    return this.sessionsRepository.save({
+      user_id: userId,
+      session_id: newSessionId,
+      expiration: oldSession.expiration,
+    });
   }
 }
