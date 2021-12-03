@@ -22,10 +22,17 @@ export class ItineraryCommentsService {
       author: user,
       ...newCommentDto,
     });
+
+    const author = {
+      id: resp.author.id,
+      username: resp.author.username,
+      profilePic: resp.author.profile_pic,
+    };
+
     return {
       id: resp.id,
       comment: resp.comment,
-      author: resp.author,
+      author,
     };
   }
 
