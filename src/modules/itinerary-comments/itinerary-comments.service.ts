@@ -53,4 +53,8 @@ export class ItineraryCommentsService {
         return itinerary.author.id === userId;
       });
   }
+
+  updateOne(id: number, comment: string) {
+    return this.itinerariesCommentsRepository.update(id, { comment });
+  }
 }

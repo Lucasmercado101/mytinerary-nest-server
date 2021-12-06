@@ -8,6 +8,7 @@ import {
   HttpCode,
   UseGuards,
   ForbiddenException,
+  Put,
 } from '@nestjs/common';
 import { ItineraryCommentsService } from './itinerary-comments.service';
 import { IsLoggedInGuard } from 'src/guards/isLoggedIn.guard';
@@ -39,6 +40,24 @@ export class ItineraryCommentsController {
       comment,
       itinerary: itinerary,
     });
+  }
+
+  @Put(':id')
+  @UseGuards(ItineraryCommentExistsGuard)
+  async putComment(
+    @Param('id', ParseIntPipe) commentId: number,
+    @UserD() user: User,
+    @PlainBody() comment: string,
+  ) {
+    if (
+      await this.itinerariesCommentsService.belongsToUser(commentId, user.id)
+    ) {
+      await this.itinerariesCommentsService.updateOne(commentId, comment);
+    } else {
+      throw new ForbiddenException(
+        'You are not allowed to update this comment',
+      );
+    }
   }
 
   @Delete(':id')
